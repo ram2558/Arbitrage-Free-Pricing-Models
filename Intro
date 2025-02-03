@@ -1,0 +1,8 @@
+1. Arbitrage-Free Pricing Models
+Project: No-Arbitrage Stock Portfolio Simulator
+Goal: Build a Python-based simulator that models a one-period binomial market and tests for arbitrage opportunities.
+Features:
+Simulate different stock prices with given parameters (𝑆0,𝑢,𝑑,𝑟).
+Implement a function to check if a portfolio satisfies no-arbitrage conditions.
+Visualize results (e.g., portfolio value over time, arbitrage checks).
+Tools: Python, NumPy, Matplotlib.
