@@ -1,4 +1,4 @@
-1. Arbitrage-Free Pricing Models
+Arbitrage-Free Pricing Models
 Project: No-Arbitrage Stock Portfolio Simulator
 Goal: Build a Python-based simulator that models a one-period binomial market and tests for arbitrage opportunities.
 Features:
