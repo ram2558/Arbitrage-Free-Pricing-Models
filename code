@@ -1,0 +1,106 @@
+!pip install numpy matplotlib
+
+class BinomialModel:
+    def __init__(self, S0, u, d, r):
+        self.S0 = S0  # Initial stock price
+        self.u = u    # Up factor
+        self.d = d    # Down factor
+        self.r = r    # Risk-free rate
+
+    def get_stock_prices(self):
+        """Simulate stock prices at the end of the period."""
+        S_up = self.S0 * self.u  # Stock price if it goes up
+        S_down = self.S0 * self.d  # Stock price if it goes down
+        return S_up, S_down
+
+
+def is_arbitrage_free(self):
+    """Check if the model satisfies the no-arbitrage condition."""
+    return self.d < 1 + self.r < self.u
+
+class Portfolio:
+    def __init__(self, model, stock_shares, bond_units):
+        self.model = model
+        self.stock_shares = stock_shares  # Number of shares of the stock
+        self.bond_units = bond_units      # Number of units of the risk-free bond
+
+    def portfolio_value(self):
+        """Calculate the portfolio value at the end of the period."""
+        S_up, S_down = self.model.get_stock_prices()
+        bond_value = self.bond_units * (1 + self.model.r)  # Bond grows at risk-free rate
+
+        # Portfolio value in up and down scenarios
+        value_up = self.stock_shares * S_up + bond_value
+        value_down = self.stock_shares * S_down + bond_value
+        return value_up, value_down
+
+import matplotlib.pyplot as plt
+
+def visualize_portfolio(model, portfolio):
+    """Visualize portfolio values and arbitrage check."""
+    value_up, value_down = portfolio.portfolio_value()
+    scenarios = ['Up', 'Down']
+    values = [value_up, value_down]
+
+    plt.bar(scenarios, values, color=['blue', 'red'])
+    plt.title('Portfolio Value at End of Period')
+    plt.xlabel('Scenario')
+    plt.ylabel('Portfolio Value')
+    plt.show()
+
+    # Check arbitrage condition
+    if is_arbitrage_free():
+        print("The model is arbitrage-free.")
+    else:
+        print("Arbitrage opportunity exists!")
+
+class BinomialModel:
+    def __init__(self, S0, u, d, r):
+        self.S0 = S0  # Initial stock price
+        self.u = u    # Up factor
+        self.d = d    # Down factor
+        self.r = r    # Risk-free rate
+
+    def get_stock_prices(self):
+        """Simulate stock prices at the end of the period."""
+        S_up = self.S0 * self.u  # Stock price if it goes up
+        S_down = self.S0 * self.d  # Stock price if it goes down
+        return S_up, S_down
+
+    def is_arbitrage_free(self): # Moved is_arbitrage_free inside the BinomialModel class
+        """Check if the model satisfies the no-arbitrage condition."""
+        return self.d < 1 + self.r < self.u # Now it can access class attributes using self
+
+import matplotlib.pyplot as plt
+
+def visualize_portfolio(model, portfolio):
+    """Visualize portfolio values and arbitrage check."""
+    value_up, value_down = portfolio.portfolio_value()
+    scenarios = ['Up', 'Down']
+    values = [value_up, value_down]
+
+    plt.bar(scenarios, values, color=['blue', 'red'])
+    plt.title('Portfolio Value at End of Period')
+    plt.xlabel('Scenario')
+    plt.ylabel('Portfolio Value')
+    plt.show()
+
+    # Check arbitrage condition
+    if model.is_arbitrage_free(): # Call is_arbitrage_free on the model instance
+        print("The model is arbitrage-free.")
+    else:
+        print("Arbitrage opportunity exists!")
+
+if __name__ == "__main__":
+    # Define model parameters
+    S0 = 100  # Initial stock price
+    u = 1.1   # Up factor
+    d = 0.9   # Down factor
+    r = 0.05  # Risk-free rate
+
+    # Create model and portfolio
+    model = BinomialModel(S0, u, d, r)
+    portfolio = Portfolio(model, stock_shares=10, bond_units=50)
+
+    # Visualize results
+    visualize_portfolio(model, portfolio)
